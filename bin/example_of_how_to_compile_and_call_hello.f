@@ -11,4 +11,7 @@ C    and then to call from terminal
       julia> ccall(hello_,Void,())
        Hello World!
        
+C  the greet method puts two functions into one binary file called
+C  "greetings", and not appending it with .o works fine
+
 
