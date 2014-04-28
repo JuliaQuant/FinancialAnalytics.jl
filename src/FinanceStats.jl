@@ -1,6 +1,6 @@
 module FinanceStats
 
-export greet
+export greet, swilk
 
 ###### include ##################
 
