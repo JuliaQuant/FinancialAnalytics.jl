@@ -1,4 +1,4 @@
-module FinanceStats
+module FinancialAnalytics
 
 export greet, swilk, shapiro, ∑matrix
 
