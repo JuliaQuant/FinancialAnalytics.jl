@@ -1,7 +1,7 @@
 module FinancialAnalytics
 
 using FinancialBlotter, Reexport
-@reexport using FinancialSeries
+@reexport using FinancialBlotter
 
 export greet, swilk, shapiro, ∑matrix
 
