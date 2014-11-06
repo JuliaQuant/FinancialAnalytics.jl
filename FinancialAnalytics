@@ -1,5 +1,0 @@
-[master 50ae846] name change FinanceStats =
- 4 files changed, 49 insertions(+), 2 deletions(-)
- rename src/{FinanceStats.jl => FinancialAnalytics.jl} (82%)
- create mode 100644 src/oldmatrix.jl
- create mode 100644 src/trademodelanalysis.jl

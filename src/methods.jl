@@ -1,3 +1,99 @@
+function foo(x)
+    sum(x)
+end
+
+function bar(x)
+    mean(x)
+end
+
+function analyze(x;funcs=tradestats)
+    for i in 1:length(funcs)
+        @printf("The value for %s is %f", funcs[i], funcs[i](x)) 
+        println("")
+    end
+end
+
+######## annualized return ###################
+
+# returns a single value in simple terms
+function annualizedreturn{T}(ta::TimeArray{T,1})
+    exp(sum(diff(log(ta.values)))) ^ (252/length(ta)) - 1 
+end
+
+function annualizedreturn(fa::Array{Float64, 1})
+    exp(sum(diff(log(fa)))) ^ (252/size(fa,1)) - 1 
+end
+
+######## equity curve ########################
+
+function equity{T}(ta::TimeArray{T,1}; prices=false)
+    prices ?
+    TimeArray(ta.timestamp, [1.0, expm1(cumsum(diff(log(ta.values)))) + 1], ["equity"]) :
+    TimeArray(ta.timestamp, [expm1(cumsum(ta.values)) + 1], ["equity"])
+end
+
+######## from the oldmatrix.jl
+
+# I think this might be in correct
+# it claims to be correct by treating the µ vector as a scalar for single vector case
+#function ∑matrix(x::Vector)
+function sigma(x::Vector)
+    y = x * mean(x)
+    y * y'
+end
+
+function Shapiro_Wilks{T<:Float64}(x::Vector{T})
+    sx = sort(x)
+    d = Truncated(Normal(mean(xs),1),minimum(xs), maximum(xs))
+    m = sort(rand(d, length(x)))
+    #V = ∑matrix(sx)
+    V = sigma(sx)
+    a = m' * inv(V) / sqrt(m' * inv(V) * inv(V) * m)
+    y - x.-mean(x)
+
+    # ∑ ai * xi and then ^ 2
+    # so a cross product and then square it
+    # a'x ^ 2
+    num = a'x ^ 2
+
+    # ∑ (xi - xbar)  ^ 2
+    # so first get y = xi - xbar vector
+    # y'y
+    den = y'y
+    num/den
+end
+
+######## from the matrix.jl
+
+function ∑matrix(x::Vector, y::Vector)
+    z = x .* y
+    z .* z'
+end
+
+function shapiro{T<:Float64}(x::Vector{T})
+    sx = sort(x)
+    # d = Truncated(Normal(mean(xs),1),minimum(xs), maximum(xs))
+    # m = sort(rand(d, length(x)))
+
+    V = ∑matrix(sx)
+    # a = m' * inv(V) / sqrt(m' * inv(V) * inv(V) * m)
+
+    # ∑ ai * xi and then ^ 2
+    # so a cross product and then square it
+    # a'x ^ 2
+
+    num = a'x ^ 2
+
+    # ∑ (xi - xbar)  ^ 2
+    # so first get y = xi - xbar vector
+    # y'y
+
+    y - x.-mean(x)
+    den = y'y
+
+    num/den
+end
+
 ## _____ Shapiro Wilk fortran code___________________
 
 ######===========     Perform the Shapiro-Wilk test for normality.

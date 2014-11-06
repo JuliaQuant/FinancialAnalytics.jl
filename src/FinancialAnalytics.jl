@@ -1,12 +1,16 @@
+using TimeSeries
+
 module FinancialAnalytics
 
-using FinancialBlotter, Reexport
-@reexport using FinancialBlotter
+using TimeSeries
 
-export greet, swilk, shapiro, ∑matrix
+export foo, bar,
+       analyze,
+       tradestats, rets,
+       greet, swilk, shapiro, ∑matrix
 
-###### include ##################
-
+include("methods.jl")
+include("const.jl")
 include("fortran.jl")
 include("matrix.jl")
 
