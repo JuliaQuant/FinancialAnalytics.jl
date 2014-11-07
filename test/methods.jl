@@ -4,12 +4,16 @@ r = percentchange(cl)
 
 facts("ratio algorithms are correct") do
 
-  context("d_ratio") do
-      @pending d_ratio(r) => 1.207051 # R's PerformanceAnalytics result
+  context("burke_ratio") do
+      @pending burke_ratio(r) => -0.4743222 # R's PerformanceAnalytics result
   end
 
   context("calmar_ratio") do
       @pending calmar_ratio(r) => -0.6208448 # R's PerformanceAnalytics result
+  end
+
+  context("d_ratio") do
+      @pending d_ratio(r) => 1.207051 # R's PerformanceAnalytics result
   end
 
   context("kelly_ratio") do
