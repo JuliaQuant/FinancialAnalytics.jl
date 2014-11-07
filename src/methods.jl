@@ -1,15 +1,6 @@
 function foo{T}(ta::TimeArray{T,1}; prices=false, log_transform=false) 
-    if prices == false && log_transform == false # simple returns
-        r = ta
-    elseif prices == false && log_transform == true # log returns
-        r = basecall(ta,expm1)
-    elseif prices == true && log_transform == false # regular prices
-        r = percentchange(ta)
-    elseif prices == true && log_transform == true # log prices
-        r = percentchange(basecall(ta,exp))
-    else
-        error("invalid key word argument")
-    end
+    #r = keyword_check(ta, prices=prices, log_transform=log_transform)
+    r = keyword_check(ta, prices, log_transform)
 
     sum(r.values)
 end
