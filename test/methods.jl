@@ -24,6 +24,10 @@ facts("ratio algorithms are correct") do
       @pending martin_ratio(r) => -0.4974161 # R's PerformanceAnalytics result
   end
 
+  context("omega_sharpe_ratio") do
+      @pending omega_sharpe_ratio(r) => -0.0929731 # R's PerformanceAnalytics result
+  end
+
   context("pain_ratio") do
       @pending pain_ratio(r) => -0.563304 # R's PerformanceAnalytics result
   end
@@ -38,8 +42,16 @@ facts("ratio algorithms are correct") do
       @pending sharpe_ratio(r, method=es) => -0.005944104  # R's PerformanceAnalytics result
   end
 
+  context("skewness_kurtosis_ratio") do
+      @pending skewness_kurtosis_ratio(r) => -0.09644818 # R's PerformanceAnalytics result
+  end
+
   context("sortino_ratio") do
       @pending sortino_ratio(r) => -0.04005694 # R's PerformanceAnalytics result
+  end
+
+  context("upside_potential_ratio") do
+      @pending upside_potential_ratio(r) =>  0.6002809 # R's PerformanceAnalytics result
   end
 end
 
@@ -59,5 +71,52 @@ facts("index algorithms are correct") do
 
   context("ulcer_index") do
       @pending ulcer_index(r) => 1.126953 # R's PerformanceAnalytics result
+  end
+end
+
+facts("other algorithms are correct") do
+
+  context("downside_deviation") do
+      @pending downside_deviation(r) => 0.04190903 # R's PerformanceAnalytics result
+  end
+
+  context("downside_frequency") do
+      @pending downside_frequency(r) => 0.508 # R's PerformanceAnalytics result
+  end
+
+  context("expected_shortfall") do
+      @pending expected_shortfall(r) => -0.2824223 # R's PerformanceAnalytics result
+  end
+
+  context("max_drawdown") do
+      @pending max_drawdown(r) => 0.9029059 # R's PerformanceAnalytics result
+  end
+
+  context("mean_absolute_deviation") do
+      @pending mean_absolute_deviation(r) => 0.03441915 # R's PerformanceAnalytics result
+  end
+
+  context("omega") do
+      @pending omega(r) => 0.9070269 # R's PerformanceAnalytics result
+  end
+
+  context("semi_deviation") do
+      @pending semi_deviation(r) => 0.04119674 # R's PerformanceAnalytics result
+  end
+
+  context("upside_frequency") do
+      @pending upside_frequency(r) => 0.464 # R's PerformanceAnalytics result
+  end
+
+  context("upside_risk") do
+      @pending upside_risk(r) => 0.03021397 # R's PerformanceAnalytics result
+  end
+
+  context("value_at_risk") do
+      @pending value_at_risk(r) => -0.09221999 # R's PerformanceAnalytics result
+  end
+
+  context("volatility_skewness") do
+      @pending volatility_skewness(r) => 0.5197569 # R's PerformanceAnalytics result
   end
 end

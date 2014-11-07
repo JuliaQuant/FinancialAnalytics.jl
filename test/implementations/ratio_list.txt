@@ -1,0 +1,6 @@
+BernadoLedoitratio
+AdjustedSharpeRatio
+AppraisalRatio
+InformationRatio
+TreynorRatio
+UpDownRatios
