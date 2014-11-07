@@ -1,5 +1,17 @@
-function foo(x)
-    sum(x)
+function foo{T}(ta::TimeArray{T,1}; prices=false, log_transform=false) 
+    if prices == false && log_transform == false # simple returns
+        r = ta
+    elseif prices == false && log_transform == true # log returns
+        r = basecall(ta,expm1)
+    elseif prices == true && log_transform == false # regular prices
+        r = percentchange(ta)
+    elseif prices == true && log_transform == true # log prices
+        r = percentchange(basecall(ta,exp))
+    else
+        error("invalid key word argument")
+    end
+
+    sum(r.values)
 end
 
 function bar(x)
@@ -15,13 +27,8 @@ end
 
 ######## annualized return ###################
 
-# returns a single value in simple terms
-function annualizedreturn{T}(ta::TimeArray{T,1})
+function annualized_return{T}(ta::TimeArray{T,1})
     exp(sum(diff(log(ta.values)))) ^ (252/length(ta)) - 1 
-end
-
-function annualizedreturn(fa::Array{Float64, 1})
-    exp(sum(diff(log(fa)))) ^ (252/size(fa,1)) - 1 
 end
 
 ######## equity curve ########################

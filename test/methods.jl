@@ -2,6 +2,25 @@ using MarketData
 
 r = percentchange(cl)
 
+facts("keyword checking is correct") do
+
+  context("simple returns selected") do
+      @fact foo(r) => -0.8392600357038683
+  end
+
+  context("log returns selected") do
+      @fact foo(percentchange(cl,method="log"), log_transform=true) => -0.8392600357038683
+  end
+
+  context("simple prices selected") do
+      @fact foo(cl, prices=true) => -0.8392600357038683
+  end
+
+  context("log prices selected") do
+      @fact foo(basecall(cl,log), prices=true, log_transform=true) => -0.8392600357038683
+  end
+end
+
 facts("ratio algorithms are correct") do
 
   context("burke_ratio") do
@@ -75,6 +94,10 @@ facts("index algorithms are correct") do
 end
 
 facts("other algorithms are correct") do
+
+  context("annualized_return") do
+      @pending annualized_return(r) => -0.5605644 # R's PerformanceAnalytics result
+  end
 
   context("downside_deviation") do
       @pending downside_deviation(r) => 0.04190903 # R's PerformanceAnalytics result
