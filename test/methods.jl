@@ -70,9 +70,9 @@ facts("ratio algorithms are correct") do
   end
 
   context("sharpe_ratio") do
-      @pending sharpe_ratio(Ra, method=std) => -0.032510205 # R's PerformanceAnalytics result
-      @pending sharpe_ratio(Ra, method=var) => -0.018213539 # R's PerformanceAnalytics result
-      @pending sharpe_ratio(Ra, method=es)  => -0.005940691 # R's PerformanceAnalytics result
+      @pending sharpe_ratio(Ra, method=std)                => -0.032510205 # R's PerformanceAnalytics result
+      @pending sharpe_ratio(Ra, method=value_at_risk)      => -0.018213539 # R's PerformanceAnalytics result
+      @pending sharpe_ratio(Ra, method=expected_shortfall) => -0.005940691 # R's PerformanceAnalytics result
   end
 
   context("skewness_kurtosis_ratio") do
@@ -95,7 +95,7 @@ end
 facts("index algorithms are correct") do
 
   context("hurst_index") do
-      @pending hurst_indes(Ra) => 0.4087282 # R's PerformanceAnalytics result
+      @pending hurst_index(Ra) => 0.4087282 # R's PerformanceAnalytics result
   end
 
   context("pain_index") do
