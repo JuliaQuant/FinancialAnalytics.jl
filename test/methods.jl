@@ -1,3 +1,7 @@
+# R's PerformanceAnalytics results vary slightly because that package assigns a return of 0.00 for the first
+# day while TimeSeries removes the first day from calculation because it considers the first day 
+# consumed by calculation. The end result is testing in R uses 500 dates versus 499 dates in this package.
+
 using MarketData
 
 r = percentchange(cl)
@@ -96,7 +100,8 @@ end
 facts("other algorithms are correct") do
 
   context("annualized_return") do
-      @pending annualized_return(r) => -0.5605644 # R's PerformanceAnalytics result
+      @fact annualized_return(r, method="arithmetic") =>  -0.4238347274496489 # R's PerformanceAnalytics result -0.4230444
+      @fact annualized_return(r, method="geometric")  =>  -0.5612879122675767 # R's PerformanceAnalytics result -0.5605644
   end
 
   context("downside_deviation") do

@@ -9,6 +9,8 @@ function bar(x)
     mean(x)
 end
 
+######## analyze ###################
+
 function analyze(x;funcs=tradestats)
     for i in 1:length(funcs)
         @printf("The value for %s is %f", funcs[i], funcs[i](x)) 
@@ -17,9 +19,14 @@ function analyze(x;funcs=tradestats)
 end
 
 ######## annualized return ###################
+### reference Bacon, Carl. Practical Portfolio Performance Measurement and Attribution. Wiley. 2004. p. 25
 
-function annualized_return{T}(ta::TimeArray{T,1})
-    exp(sum(diff(log(ta.values)))) ^ (252/length(ta)) - 1 
+function annualized_return{T}(ta::TimeArray{T,1}; prices=false, log_transform=false, method="arithmetic", periods=252) 
+    r = keyword_check(ta, prices, log_transform)
+    n = length(r)
+    method == "arithmetic" ? (periods/n) * sum(r.values) :
+    method == "geometric" ? prod(1+r.values) ^ (periods/n) - 1 :
+    error("only arithmetic and geometric methods supported")
 end
 
 ######## equity curve ########################
