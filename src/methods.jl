@@ -21,6 +21,21 @@ end
 ######## annualized return ###################
 ### reference Bacon, Carl. Practical Portfolio Performance Measurement and Attribution. Wiley. 2004. p. 25
 
+@doc """
+# Annualized Returns
+ 
+# Keyword Argument defaults
+      prices = false
+      log_transform = false
+      method = "arithmetic" ("geometric" supported) 
+      period = 252 (for daily)
+
+# Details
+
+# References
+  Bacon, Carl. Practical Portfolio Performance Measurement and Attribution. Wiley. 2004. p. 25
+""" ->
+
 function annualized_return{T}(ta::TimeArray{T,1}; prices=false, log_transform=false, method="arithmetic", periods=252) 
     r = keyword_check(ta, prices, log_transform)
     n = length(r)
@@ -39,7 +54,7 @@ end
 
 ######## from the oldmatrix.jl
 
-# I think this might be in correct
+# I think this might be incorrect
 # it claims to be correct by treating the µ vector as a scalar for single vector case
 #function ∑matrix(x::Vector)
 function sigma(x::Vector)
