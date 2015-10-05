@@ -1,11 +1,11 @@
 ######## annualized return ###################
 
 # returns a single value in simple terms
-function annualizedreturn{T}(ta::TimeArray{T,1})
+function annualized_return{T}(ta::TimeArray{T,1})
     exp(sum(diff(log(ta.values)))) ^ (252/length(ta)) - 1 
 end
 
-function annualizedreturn(fa::Array{Float64, 1})
+function annualized_return(fa::Array{Float64, 1})
     exp(sum(diff(log(fa)))) ^ (252/size(fa,1)) - 1 
 end
 
