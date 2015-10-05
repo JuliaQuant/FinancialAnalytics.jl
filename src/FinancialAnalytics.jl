@@ -1,12 +1,15 @@
+using Distributions, TimeSeries
+
 module FinancialAnalytics
 
-using FinancialBlotter, Reexport
-@reexport using FinancialBlotter
+using Distributions, TimeSeries
 
-export greet, swilk, shapiro, ∑matrix
+export annualized_return, equity,
+       greet, swilk, shapiro, ∑matrix
 
 ###### include ##################
 
+include("returns.jl")
 include("fortran.jl")
 include("matrix.jl")
 

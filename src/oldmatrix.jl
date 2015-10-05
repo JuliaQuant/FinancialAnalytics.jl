@@ -26,4 +26,3 @@ function Shapiro_Wilks{T<:Float64}(x::Vector{T})
     den = y'y
     num/den
 end
-
