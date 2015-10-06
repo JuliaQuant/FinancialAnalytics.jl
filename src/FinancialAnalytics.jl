@@ -1,17 +1,14 @@
-using TimeSeries
+using Distributions, Dates, TimeSeries
 
 module FinancialAnalytics
 
-using TimeSeries
+using Distributions, Dates, TimeSeries
 
-export foo, bar,
-       annualized_return,
-       analyze,
-       tradestats, rets,
+export annualized_return, equity,
        greet, swilk, shapiro, ∑matrix
 
-include("methods.jl")
-include("const.jl")
-include("helpers.jl")
+include("returns.jl")
+include("fortran.jl")
+include("matrix.jl")
 
 end

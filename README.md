@@ -6,3 +6,5 @@ FinanceAnalytics.jl
 ===============
 
 Commonly used metrics for analyzing time series returns. 
+
+[here](http://financialanalytics.readthedocs.org/en/latest/).
