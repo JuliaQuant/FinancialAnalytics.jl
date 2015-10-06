@@ -8,7 +8,6 @@ export annualized_return, equity,
        greet, swilk, shapiro, ∑matrix
 
 include("returns.jl")
-include("fortran.jl")
-include("matrix.jl")
+include("methods.jl")
 
 end

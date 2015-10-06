@@ -21,20 +21,20 @@ end
 ######## annualized return ###################
 ### reference Bacon, Carl. Practical Portfolio Performance Measurement and Attribution. Wiley. 2004. p. 25
 
-@doc """
-# Annualized Returns
- 
-# Keyword Argument defaults
-      prices = false
-      log_transform = false
-      method = "arithmetic" ("geometric" supported) 
-      period = 252 (for daily)
-
-# Details
-
-# References
-  Bacon, Carl. Practical Portfolio Performance Measurement and Attribution. Wiley. 2004. p. 25
-""" ->
+### @doc """
+### # Annualized Returns
+###  
+### # Keyword Argument defaults
+###       prices = false
+###       log_transform = false
+###       method = "arithmetic" ("geometric" supported) 
+###       period = 252 (for daily)
+### 
+### # Details
+### 
+### # References
+###   Bacon, Carl. Practical Portfolio Performance Measurement and Attribution. Wiley. 2004. p. 25
+### """ ->
 
 function annualized_return{T}(ta::TimeArray{T,1}; prices=false, log_transform=false, method="arithmetic", periods=252) 
     r = keyword_check(ta, prices, log_transform)
@@ -167,7 +167,7 @@ end
 
 function swilk(x::Vector{Float64})
 
-    fstats = dlopen(Pkg.dir("FinanceStats//bin/swilk"))
+    fstats = dlopen(Pkg.dir("FinanceAnalytics//bin/swilk"))
     swilk_ = dlsym(fstats, :swilk_)
 
         #     SUBROUTINE SWILK (INIT, X, N, N1 , N2, A, W, PW, IFAULT)
