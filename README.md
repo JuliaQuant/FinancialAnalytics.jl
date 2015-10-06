@@ -1,11 +1,10 @@
+[![Build Status](https://travis-ci.org/JuliaQuant/FinancialAnalytics.jl.png)](https://travis-ci.org/JuliaQuant/FinancialAnalytics.jl)
+[![FinancialAnalytics](http://pkg.julialang.org/badges/FinancialAnalytics_release.svg)](http://pkg.julialang.org/?pkg=FinancialAnalytics&ver=release)
+[![Coverage Status](https://img.shields.io/coveralls/JuliaQuant/FinancialAnalytics.jl.svg)](https://coveralls.io/r/JuliaQuant/FinancialAnalytics.jl)
+R
 FinanceAnalytics.jl
 ===============
 
-[![Build Status](https://travis-ci.org/JuliaQuant/FinancialAnalytics.jl.svg?branch=master)](https://travis-ci.org/JuliaQuant/FinancialAnalytics.jl)
-[![Coverage Status](https://coveralls.io/repos/JuliaQuant/FinancialAnalytics.jl/badge.svg?branch=master)](https://coveralls.io/r/JuliaQuant/FinancialAnalytics.jl?branch=master)
-[![FinancialAnalytics](http://pkg.julialang.org/badges/FinancialAnalytics_0.3.svg)](http://pkg.julialang.org/?pkg=FinancialAnalytics&ver=0.3)
-[![FinancialAnalytics](http://pkg.julialang.org/badges/FinancialAnalytics_0.4.svg)](http://pkg.julialang.org/?pkg=FinancialAnalytics&ver=0.4)
-
-An experimental sandbox of functions that implement common statistical methods in finance
+Commonly used metrics for analyzing time series returns. 
 
 [here](http://financialanalytics.readthedocs.org/en/latest/).

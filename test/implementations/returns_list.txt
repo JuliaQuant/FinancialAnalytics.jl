@@ -1,0 +1,10 @@
+Geltner
+annualized
+annualized.excess
+calculate
+clean
+cumulative
+excess
+portfolio
+read
+relative

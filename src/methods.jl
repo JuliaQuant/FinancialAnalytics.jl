@@ -1,3 +1,119 @@
+function foo{T}(ta::TimeArray{T,1}; prices=false, log_transform=false) 
+    #r = keyword_check(ta, prices=prices, log_transform=log_transform)
+    r = keyword_check(ta, prices, log_transform)
+
+    sum(r.values)
+end
+
+function bar(x)
+    mean(x)
+end
+
+######## analyze ###################
+
+function analyze(x;funcs=tradestats)
+    for i in 1:length(funcs)
+        @printf("The value for %s is %f", funcs[i], funcs[i](x)) 
+        println("")
+    end
+end
+
+######## annualized return ###################
+### reference Bacon, Carl. Practical Portfolio Performance Measurement and Attribution. Wiley. 2004. p. 25
+
+@doc """
+# Annualized Returns
+ 
+# Keyword Argument defaults
+      prices = false
+      log_transform = false
+      method = "arithmetic" ("geometric" supported) 
+      period = 252 (for daily)
+
+# Details
+
+# References
+  Bacon, Carl. Practical Portfolio Performance Measurement and Attribution. Wiley. 2004. p. 25
+""" ->
+
+function annualized_return{T}(ta::TimeArray{T,1}; prices=false, log_transform=false, method="arithmetic", periods=252) 
+    r = keyword_check(ta, prices, log_transform)
+    n = length(r)
+    method == "arithmetic" ? (periods/n) * sum(r.values) :
+    method == "geometric" ? prod(1+r.values) ^ (periods/n) - 1 :
+    error("only arithmetic and geometric methods supported")
+end
+
+######## equity curve ########################
+
+function equity{T}(ta::TimeArray{T,1}; prices=false)
+    prices ?
+    TimeArray(ta.timestamp, [1.0, expm1(cumsum(diff(log(ta.values)))) + 1], ["equity"]) :
+    TimeArray(ta.timestamp, [expm1(cumsum(ta.values)) + 1], ["equity"])
+end
+
+######## from the oldmatrix.jl
+
+# I think this might be incorrect
+# it claims to be correct by treating the µ vector as a scalar for single vector case
+#function ∑matrix(x::Vector)
+function sigma(x::Vector)
+    y = x * mean(x)
+    y * y'
+end
+
+function Shapiro_Wilks{T<:Float64}(x::Vector{T})
+    sx = sort(x)
+    d = Truncated(Normal(mean(xs),1),minimum(xs), maximum(xs))
+    m = sort(rand(d, length(x)))
+    #V = ∑matrix(sx)
+    V = sigma(sx)
+    a = m' * inv(V) / sqrt(m' * inv(V) * inv(V) * m)
+    y - x.-mean(x)
+
+    # ∑ ai * xi and then ^ 2
+    # so a cross product and then square it
+    # a'x ^ 2
+    num = a'x ^ 2
+
+    # ∑ (xi - xbar)  ^ 2
+    # so first get y = xi - xbar vector
+    # y'y
+    den = y'y
+    num/den
+end
+
+######## from the matrix.jl
+
+function ∑matrix(x::Vector, y::Vector)
+    z = x .* y
+    z .* z'
+end
+
+function shapiro{T<:Float64}(x::Vector{T})
+    sx = sort(x)
+    # d = Truncated(Normal(mean(xs),1),minimum(xs), maximum(xs))
+    # m = sort(rand(d, length(x)))
+
+    V = ∑matrix(sx)
+    # a = m' * inv(V) / sqrt(m' * inv(V) * inv(V) * m)
+
+    # ∑ ai * xi and then ^ 2
+    # so a cross product and then square it
+    # a'x ^ 2
+
+    num = a'x ^ 2
+
+    # ∑ (xi - xbar)  ^ 2
+    # so first get y = xi - xbar vector
+    # y'y
+
+    y - x.-mean(x)
+    den = y'y
+
+    num/den
+end
+
 ## _____ Shapiro Wilk fortran code___________________
 
 ######===========     Perform the Shapiro-Wilk test for normality.
